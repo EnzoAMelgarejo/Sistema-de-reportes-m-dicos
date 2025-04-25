@@ -1,0 +1,22 @@
+# General
+node_modules/
+dist/
+.env
+.DS_Store
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# Backend
+Backend/node_modules/
+Backend/dist/
+Backend/.env
+
+# Frontend
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.env
