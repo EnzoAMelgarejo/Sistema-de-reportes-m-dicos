@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,9 +13,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Reporte {
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum Status {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum Category {
+  BUG
+  STORY
+  DOCUMENTATION
+  IMPROVEMENT
+  TASK
+}
+
+model Report {
   id        Int      @id @default(autoincrement())
-  titulo    String
-  contenido String
-  creadoEn  DateTime @default(now())
+  title     String
+  content   String
+  priority  Priority @default(MEDIUM)
+  status    Status   @default(PENDING)
+  category  Category @default(BUG)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authorId   Int
+  assignedId Int?
+
+  author   User  @relation("AuthorReports", fields: [authorId], references: [id])
+  assignee User? @relation("AssigneeReports", fields: [assignedId], references: [id])
+
+  attachments Attachment[] //One-to-many relationship
+}
+
+model Attachment {
+  id       Int    @id @default(autoincrement())
+  url      String // File path or cloud URL
+  filename String // Original file name
+  report   Report @relation(fields: [reportId], references: [id])
+  reportId Int
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  auth0Id   String   @unique
+  email     String   @unique
+  role      Role     @default(USER)
+  reports   Report[] @relation("AuthorReports")
+  assigned  Report[] @relation("AssigneeReports")
+  createdAt DateTime @default(now())
+  isActive  Boolean  @default(true)
+}
+
+enum Role {
+  USER
+  ADMIN
 }
