@@ -1,0 +1,61 @@
+// 🎨 Variables de colores ajustadas a la paleta proporcionada
+$color-principal: #2E736C;         // Verde petróleo
+$color-secundario: #C6C9D1;       // Lavanda gris
+$color-advertencia: #D4B866;       // Amarillo grisáceo
+$color-error: #D96C6C;             // Rojo terracota
+$color-texto: #2C2C2C;             // Gris casi negro
+$color-fondo: #F9FAFB;             // Gris porcelana
+$color-fondo-alt: #ECEEF1;         // Gris claro
+
+// 🧱 Variables de espaciado y tipografía
+$font-base: 'Segoe UI', sans-serif;
+$spacing-unit: 1rem;
+
+// 🌐 Estilos globales
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-fondo;
+  color: $color-texto;
+  font-family: $font-base;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $color-secundario;
+  margin-top: 0;
+}
+
+a {
+  color: $color-principal;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($color-principal, 15%);
+  }
+}
+
+button {
+  background-color: $color-principal;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: $font-base;
+
+  &:hover {
+    background-color: darken($color-principal, 15%);
+  }
+}
+
+// 📦 Utilidades (opcional)
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-unit;
+}

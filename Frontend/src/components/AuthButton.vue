@@ -6,6 +6,9 @@
         
             <div v-else>
                 <span>Hola, {{ user?.name }}</span>
+                <pre v-if="user">
+                    Roles: {{ user['https://myapp.example/roles'] }}
+                </pre>
                 <button @click="handleLogout">Logout</button>
             </div>
         </div>
@@ -16,7 +19,6 @@
     import { useAuth0 } from '@auth0/auth0-vue';
     import { watch } from 'vue';
 
-    
     const {
         loginWithRedirect,
         logout,
@@ -37,6 +39,9 @@
 
     const handleLoginWithRedirect = () => {
         loginWithRedirect({
+            appState: {
+                targetUrl: '/home',
+            },
             loginParams:{
                 audience: 'https://reports-api-endpoint/',
                 scope: 'openid profile email'
@@ -52,14 +57,14 @@
                     scope: 'openid profile email'
                 });
 
-                fetch('https://5deb-181-117-73-54.ngrok-free.app/m2m/sync', {
+                fetch('https://c276-181-117-73-54.ngrok-free.app/m2m/sync', {
                   method: 'POST',
                   headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
                   },
                   body: JSON.stringify({
-                        auth0Id: user.value.sub, // <- esto viene del token
+                        auth0Id: user.value.sub,
                         email: user.value.email,
                         name: user.value.name,
                   })
