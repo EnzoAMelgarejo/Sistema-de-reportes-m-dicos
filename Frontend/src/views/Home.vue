@@ -41,7 +41,8 @@ const lastLoginDate = '2025-05-22';
   </div>
 </template>
 
-<style>
+<style scoped>
+
 @keyframes fadeSlideDown {
   0% {
     opacity: 0;

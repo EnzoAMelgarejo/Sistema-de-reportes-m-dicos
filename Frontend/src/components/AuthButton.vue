@@ -3,12 +3,7 @@
         <div v-if="isLoading">Cargando...</div>
         <div v-else="">
             <button v-if="!isAuthenticated" @click="handleLoginWithRedirect">Login</button>
-        
             <div v-else>
-                <span>Hola, {{ user?.name }}</span>
-                <pre v-if="user">
-                    Roles: {{ user['https://myapp.example/roles'] }}
-                </pre>
                 <button @click="handleLogout">Logout</button>
             </div>
         </div>
@@ -57,7 +52,7 @@
                     scope: 'openid profile email'
                 });
 
-                fetch('https://c276-181-117-73-54.ngrok-free.app/m2m/sync', {
+                fetch('https://9bfb-181-117-73-54.ngrok-free.app/m2m/sync', {
                   method: 'POST',
                   headers: {
                     Authorization: `Bearer ${token}`,

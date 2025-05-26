@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // 🎨 Variables de colores ajustadas a la paleta proporcionada
 $color-principal: #2E736C;         // Verde petróleo
 $color-secundario: #C6C9D1;       // Lavanda gris
@@ -35,7 +37,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: darken($color-principal, 15%);
+    color: color.adjust($color-principal, $lightness: -15%);
   }
 }
 
@@ -49,7 +51,7 @@ button {
   font-family: $font-base;
 
   &:hover {
-    background-color: darken($color-principal, 15%);
+    background-color: color.adjust($color-principal, $lightness: -15%);
   }
 }
 
