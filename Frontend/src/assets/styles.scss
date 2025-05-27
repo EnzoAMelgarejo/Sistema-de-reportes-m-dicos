@@ -1,19 +1,6 @@
 @use 'sass:color';
+@use './variables' as *; // Usás las variables acá si querés
 
-// 🎨 Variables de colores ajustadas a la paleta proporcionada
-$color-principal: #2E736C;         // Verde petróleo
-$color-secundario: #C6C9D1;       // Lavanda gris
-$color-advertencia: #D4B866;       // Amarillo grisáceo
-$color-error: #D96C6C;             // Rojo terracota
-$color-texto: #2C2C2C;             // Gris casi negro
-$color-fondo: #F9FAFB;             // Gris porcelana
-$color-fondo-alt: #ECEEF1;         // Gris claro
-
-// 🧱 Variables de espaciado y tipografía
-$font-base: 'Segoe UI', sans-serif;
-$spacing-unit: 1rem;
-
-// 🌐 Estilos globales
 * {
   box-sizing: border-box;
 }
@@ -55,7 +42,6 @@ button {
   }
 }
 
-// 📦 Utilidades (opcional)
 .container {
   max-width: 1200px;
   margin: 0 auto;

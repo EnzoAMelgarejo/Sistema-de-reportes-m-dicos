@@ -33,61 +33,67 @@ const priorityClass = computed(() => props.priority);
 </script>
 
 <style lang="scss" scoped>
-  @use '../assets/styles.scss' as *;  // Ajustá la ruta según donde tengas tu archivo de variables
-  @use 'sass:color';
+@use '../assets/variables' as *;
+@use 'sass:color';
 
+.report-card {
+  background-color: $color-fondo-alt; // Fondo alternativo para las cards
+  color: $color-texto;
+  padding: $spacing-unit;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px color.adjust($color-principal, $alpha: -0.8);
+  max-width: 320px;
+  margin: 1rem auto;
 
-  .report-card {
-    background-color: $color-fondo-alt;  // Fondo alternativo para las cards
-    color: $color-texto;
-    padding: $spacing-unit;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 6px color.adjust($color-principal, $alpha: -0.8);
-    max-width: 320px;
-    margin: 1rem auto;
-    h3 {
-      color: $color-secundario;
-      margin-bottom: 0.25rem;
-    }
-    .date,
-    .category {
-      font-size: 0.875rem;
-      opacity: 0.7;
-      margin: 0;
-    }
-    .tags {
-      margin: $spacing-unit 0;
-      display: flex;
-      gap: 0.5rem;
-      .tag {
-        padding: 0.25rem 0.6rem;
-        border-radius: 9999px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: white;
-        user-select: none;
-        text-transform: capitalize;
-        &.low {
-          background-color: $color-principal;
-        }
-        &.medium {
-          background-color: $color-advertencia;
-          color: $color-texto;
-        }
-        &.high {
-          background-color: $color-error;
-        }
-        &.status {
-          background-color: color.scale($color-secundario, $lightness: -30%);
-          color: $color-texto;
-        }
+  h3 {
+    color: $color-secundario;
+    margin-bottom: 0.25rem;
+  }
+
+  .date,
+  .category {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .tags {
+    margin: $spacing-unit 0;
+    display: flex;
+    gap: 0.5rem;
+
+    .tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      user-select: none;
+      text-transform: capitalize;
+
+      &.low {
+        background-color: $color-principal;
       }
-    }
-    .content {
-      font-size: 1rem;
-      margin-top: $spacing-unit;
+
+      &.medium {
+        background-color: $color-advertencia;
+        color: $color-texto;
+      }
+
+      &.high {
+        background-color: $color-error;
+      }
+
+      &.status {
+        background-color: color.scale($color-secundario, $lightness: -30%);
+        color: $color-texto;
+      }
     }
   }
 
+  .content {
+    font-size: 1rem;
+    margin-top: $spacing-unit;
+  }
+}
 </style>
-
