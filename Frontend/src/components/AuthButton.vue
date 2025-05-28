@@ -52,7 +52,7 @@
                     scope: 'openid profile email'
                 });
 
-                fetch('https://efa8-181-117-73-54.ngrok-free.app/m2m/sync', {
+                fetch('https://697e-181-117-73-54.ngrok-free.app/m2m/sync', {
                   method: 'POST',
                   headers: {
                     Authorization: `Bearer ${token}`,

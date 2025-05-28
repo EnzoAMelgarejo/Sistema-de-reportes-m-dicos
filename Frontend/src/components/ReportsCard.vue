@@ -3,13 +3,17 @@
     <h3>{{ title }}</h3>
     <p class="date">{{ formattedDate }}</p>
     <p class="category">{{ category }}</p>
-
+    
     <div class="tags">
       <span class="tag" :class="priorityClass">{{ priority }}</span>
       <span class="tag status">{{ status }}</span>
     </div>
-
+    
     <p v-if="content" class="content">{{ content }}</p>
+    
+    <p class="author">Autor: {{ props.author.name }} ({{ props.author.email }})</p>
+    <p v-if="props.assignee" class="assignee">Asignado a: {{ props.assignee.name }}</p>
+  
   </div>
 </template>
 
@@ -23,6 +27,14 @@ const props = defineProps<{
   status: string;
   category: string;
   content?: string;
+  author: {
+    name: string;
+    email: string;
+  };
+  assignee?: {
+    name: string;
+    email: string;
+  };
 }>();
 
 const formattedDate = computed(() =>

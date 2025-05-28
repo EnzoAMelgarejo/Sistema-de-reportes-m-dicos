@@ -118,7 +118,7 @@ async function handleSubmit() {
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 6px;
-    border: 1px solid lighten($color-principal, 20%);
+    border: 1px solid color.adjust($color-principal, $lightness: 20%);
     background-color: white;
     transition: border-color 0.3s ease;
 

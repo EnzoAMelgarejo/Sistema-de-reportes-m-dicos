@@ -1,34 +1,44 @@
 <template>
   <div class="layout" :class="{ 'navbar-collapsed': isNavbarCollapsed }">
-    <NavBar @toggle="isNavbarCollapsed = $event" />
+    <NavBar v-if="showNavbar" @toggle="isNavbarCollapsed = $event" />
     <main class="main-content">
       <router-view />
     </main>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import NavBar from './components/Navbar.vue';
+<script setup lang="ts">
+import { useRouter, useRoute } from 'vue-router'
+import { useAuth0 } from '@auth0/auth0-vue'
+import { onMounted, watch, computed, ref } from 'vue'
+import NavBar from './components/NavBar.vue'
 
-const isNavbarCollapsed = ref(false);
+const router = useRouter()
+const route = useRoute()
+const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0()
+
+const isNavbarCollapsed = ref(false)
+
+const showNavbar = computed(() => route.name !== 'Welcome')
+
+onMounted(() => {
+  watch(
+    () => route.fullPath,
+    async () => {
+      if (isLoading.value) return
+
+      if (route.meta.requiresAuth && !isAuthenticated.value) {
+        await loginWithRedirect({
+          appState: { targetUrl: route.fullPath },
+        })
+      }
+
+      if (route.name === 'Welcome' && isAuthenticated.value) {
+        router.replace('/home')
+      }
+    },
+    { immediate: true }
+  )
+})
 </script>
 
-<style scoped lang="scss">
-@use './assets/variables.scss' as *;
-
-.layout {
-  display: flex;
-
-  .main-content {
-    transition: margin-left 0.3s ease;
-    margin-left: 220px; // ancho normal del navbar
-    padding: 2rem;
-    width: 100%;
-  }
-
-  &.navbar-collapsed .main-content {
-    margin-left: 0;
-  }
-}
-</style>
